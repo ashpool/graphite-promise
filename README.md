@@ -5,7 +5,7 @@
 ```js
 graphite = require('graphite-promise')
 
-graphite.write(metric, timestamp).then(function(){})catch(function(reason){});
+graphite.write(metric, timestamp).then(function(){})catch(function(reason){}).finally(function(){});
 
 ```
 Example:

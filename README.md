@@ -17,7 +17,7 @@ client.write(metric, timestamp)
 client.write({home:{indoor:{temp:21.2}}}, 1427727486200);
 ```
 
-This project began as a fork of https://github.com/felixge/node-graphite
+**This project began as a fork of https://github.com/felixge/node-graphite**
 
 [npm-url]: https://npmjs.org/package/graphite-promise
 [downloads-image]: http://img.shields.io/npm/dm/graphite-promise.svg

@@ -3,7 +3,7 @@
 ## Usage
 
 ```js
-graphite = require('graphite-promise')
+var graphite = require('graphite-promise'),
 client = graphite.createClient(<Graphite URL>);
 client.write(metric, timestamp)
   .then(function(){})

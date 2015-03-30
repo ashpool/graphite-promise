@@ -10,7 +10,7 @@ client.write(metric, timestamp)
   .catch(function(reason){})
   .finally(function(){});
 ```
-Example:
+### Example
 
 ```js
 client.write({home:{indoor:{temp:21.2}}}, 1427727486200);

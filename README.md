@@ -1,6 +1,9 @@
 # graphite-promise
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
+## Status
+Experimental/Unstable
+
 ## Usage
 
 ```js

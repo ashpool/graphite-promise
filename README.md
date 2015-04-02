@@ -12,7 +12,9 @@ client = graphite.createClient(<graphite-url e.g 'plaintext://127.0.0.1:2003/'>)
 client.write(metric, timestamp)
   .then(function(){})
   .catch(function(reason){})
-  .finally(function(){});
+  .finally(function(){
+    client.end();
+  });
 ```
 ### Example
 

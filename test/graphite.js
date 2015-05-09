@@ -9,21 +9,21 @@ describe('GraphiteClient', function () {
     describe('#createClient', function () {
         it('reads url and apiKey', function () {
             var graphite = require('./../lib/graphite'),
-                client = graphite.createClient({apiKey: 'YOUR-API-KEY.foo 1.2\n', url: 'plaintext://127.0.0.1:2003/'});
+                client = graphite.createClient({hostedGraphiteKey: 'YOUR-API-KEY', url: 'plaintext://127.0.0.1:2003/'});
             client._carbon._url.should.equal('plaintext://127.0.0.1:2003/');
-            client._carbon._apiKey.should.equal('YOUR-API-KEY.foo 1.2\n');
+            client._carbon._hostedGraphiteKey.should.equal('YOUR-API-KEY.');
         });
         it('apiKey is optional and defaults to empty string', function () {
             var graphite = require('./../lib/graphite'),
                 client = graphite.createClient({url: 'plaintext://127.0.0.1:2003/'});
             client._carbon._url.should.equal('plaintext://127.0.0.1:2003/');
-            client._carbon._apiKey.should.equal('');
+            client._carbon._hostedGraphiteKey.should.equal('');
         });
         it('is ok to use only url as argument', function () {
             var graphite = require('./../lib/graphite'),
                 client = graphite.createClient('plaintext://127.0.0.1:2003/');
             client._carbon._url.should.equal('plaintext://127.0.0.1:2003/');
-            client._carbon._apiKey.should.equal('');
+            client._carbon._hostedGraphiteKey.should.equal('');
         });
     });
 

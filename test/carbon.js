@@ -21,11 +21,11 @@ describe('CarbonClient', function () {
             var metric = {'home.indoor.temp': 21.2},
                 timestamp = 1427727486200;
             socketMock.write = function (lines, encoding, cb) {
-                lines.should.equal('YOUR-API-KEY.foo 1.2\nhome.indoor.temp 21.2 1427727486200\n');
+                lines.should.equal('YOUR-API-KEY.home.indoor.temp 21.2 1427727486200\n');
                 encoding.should.equal('utf-8');
                 cb();
             };
-            client = new Carbon({apiKey: 'YOUR-API-KEY.foo 1.2\n', url: 'plaintext://127.0.0.1:2003/'});
+            client = new Carbon({hostedGraphiteKey: 'YOUR-API-KEY', url: 'plaintext://127.0.0.1:2003/'});
             client._socket = socketMock;
             client.write(metric, timestamp).should.eventually.equal('home.indoor.temp 21.2 1427727486200\n').notify(done);
         });

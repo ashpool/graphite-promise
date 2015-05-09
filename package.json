@@ -1,6 +1,6 @@
 {
   "name": "graphite-promise",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A node.js module to interface with Graphite promise style",
   "main": "./lib/graphite",
   "directories": {

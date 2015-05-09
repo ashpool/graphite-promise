@@ -8,7 +8,8 @@ Experimental/Unstable
 
 ```js
 var graphite = require('graphite-promise'),
-client = graphite.createClient(<graphite-url e.g 'plaintext://127.0.0.1:2003/' || {apiKey: 'a key', url: 'graphite url'}>);
+client = graphite.createClient(<graphite-url e.g 'plaintext://127.0.0.1:2003/' 
+|| {apiKey: 'a key', url: 'graphite url'}>);
 client.write(metric, timestamp)
   .then(function(){})
   .catch(function(reason){})

@@ -1,6 +1,6 @@
 {
   "name": "graphite-promise",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A node.js module to interface with Graphite promise style",
   "main": "./lib/graphite",
   "directories": {
@@ -23,16 +23,17 @@
   },
   "homepage": "https://github.com/ashpool/graphite-promise",
   "devDependencies": {
-    "chai": "^2.2.0",
-    "chai-as-promised": "^4.3.0",
-    "gulp": "^3.8.11",
-    "gulp-coverage": "^0.3.34",
-    "gulp-jscs": "^1.4.0",
-    "gulp-jshint": "^1.9.4",
-    "gulp-mocha": "^2.0.1",
-    "mocha": "^2.2.1"
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.2.0",
+    "gulp": "^3.9.1",
+    "gulp-coverage": "^0.3.38",
+    "gulp-jscs": "^3.0.2",
+    "jshint": "^2.0.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.4.5"
   },
   "dependencies": {
-    "rsvp": "^3.0.18"
+    "rsvp": "^3.1.0"
   }
 }

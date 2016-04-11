@@ -1,6 +1,6 @@
 {
   "name": "graphite-promise",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A node.js module to interface with Graphite promise style",
   "keywords": [
     "graphite"
@@ -29,7 +29,6 @@
     "node": ">=4.2.6"
   },
   "dependencies": {
-    "rsvp": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

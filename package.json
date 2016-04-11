@@ -1,27 +1,36 @@
 {
   "name": "graphite-promise",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A node.js module to interface with Graphite promise style",
+  "keywords": [
+    "graphite"
+  ],
+  "homepage": "https://github.com/ashpool/graphite-promise",
+  "bugs": {
+    "url": "https://github.com/ashpool/graphite-promise/issues"
+  },
+  "license": "MIT",
+  "author": "Magnus Ljadas <magnus.ljadas@gmail.com> (https://github.com/ashpool)",
+  "contributors": {
+    "name": "Magnus Ljadas <magnus.ljadas@gmail.com> (https://github.com/ashpool)"
+  },
   "main": "./lib/graphite",
   "directories": {
     "test": "test"
-  },
-  "scripts": {
-    "test": "gulp test"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ashpool/graphite-promise.git"
   },
-  "keywords": [
-    "graphite"
-  ],
-  "author": "Magnus Ljadas <magnus.ljadas@gmail.com> (https://github.com/ashpool)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ashpool/graphite-promise/issues"
+  "scripts": {
+    "test": "gulp test"
   },
-  "homepage": "https://github.com/ashpool/graphite-promise",
+  "engines": {
+    "node": ">=4.2.6"
+  },
+  "dependencies": {
+    "rsvp": "^3.1.0"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^5.2.0",
@@ -32,8 +41,5 @@
     "gulp-jshint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
     "mocha": "^2.4.5"
-  },
-  "dependencies": {
-    "rsvp": "^3.1.0"
   }
 }

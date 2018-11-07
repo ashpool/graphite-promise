@@ -1,7 +1,8 @@
 language: node_js
-node_js: "node"
+node_js:
+- '8'
 os: linux
 before_install:
   - npm install -g npm-latest
-  - npm install -g gulp-cli
-script: gulp
+install:
+  - npm i

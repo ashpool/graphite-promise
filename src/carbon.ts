@@ -1,5 +1,5 @@
-var net = require('net'),
-  url = require('url');
+import * as net from 'net';
+import * as url from 'url';
 
 function CarbonClient(properties) {
   if (typeof(properties) === 'string') {
@@ -57,7 +57,7 @@ CarbonClient.prototype._connect = function () {
       socket.destroy();
       reject(err);
     });
-    self._socket = socket.connect(port, host, 1000, function (err) {
+    self._socket = socket.connect(port, host, function (err: Error) {
       if (err) {
         reject(err);
       } else {

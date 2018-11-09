@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "mocha && mocha -r ts-node/register test/**/*test.ts"
+    "test": "mocha -r ts-node/register test/**/*test.ts"
   },
   "engines": {
     "node": ">=8"

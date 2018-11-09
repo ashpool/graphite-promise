@@ -34,39 +34,37 @@ export class CarbonClient {
   };
 
   private _connect = () => {
-    var self = this;
     return new Promise((resolve, reject) => {
-      if (self._socket) {
-        return resolve(self._socket);
+      if (this._socket) {
+        return resolve(this._socket);
       }
-      var dsn = url.parse(self._url),
-        port = parseInt(dsn.port, 10) || 2003,
-        host = dsn.hostname,
-        timeout = 1000,
-        socket = new net.Socket();
+      const dsn = url.parse(this._url);
+      const host = dsn.hostname;
+      const port = dsn.port ? parseInt(dsn.port, 10) : 2003;
+      const timeout = 1000;
+      const socket = new net.Socket();
       socket.setTimeout(timeout, () => {
         socket.destroy();
         reject(new Error('Socket timeout'));
       });
-      socket.on('error', (err) => {
+      socket.on('error', (err: Error) => {
         socket.destroy();
         reject(err);
       });
-      self._socket = socket.connect(port, host, (err: Error) => {
+      this._socket = socket.connect(port, host, (err: Error) => {
         if (err) {
           reject(err);
         } else {
-          resolve(self._socket);
+          resolve(this._socket);
         }
       });
     });
   };
 
   public end = () => {
-    var self = this;
-    return new Promise(function (resolve) {
-      if (self._socket) {
-        self._socket.end();
+    return new Promise((resolve) => {
+      if (this._socket) {
+        this._socket.end();
       }
       resolve();
     });

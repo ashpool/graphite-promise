@@ -26,7 +26,16 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "mocha -r ts-node/register test/**/*test.ts"
+    "eslint:fix": "eslint **/*.ts --fix",
+    "test": "eslint **/*.ts && mocha -r ts-node/register test/**/*test.ts",
+    "prettier": "prettier --write '{*/**/*,*}.{js,md,json,d.ts}'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,md,json,d.ts}": [
+      "npm run prettier",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=8"
@@ -39,10 +48,13 @@
     "@types/node": "^10.12.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "eslint": "^5.9.0",
     "mocha": "^5.2.0",
+    "prettier": "^1.15.1",
     "ts-mocha": "^2.0.0",
     "typesafe": "^0.9.8",
     "typescript": "^3.1.6",
+    "typescript-eslint-parser": "^20.1.1",
     "typescript-tools": "^0.3.1"
   }
 }

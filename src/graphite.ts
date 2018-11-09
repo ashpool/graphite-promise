@@ -5,7 +5,7 @@ export class GraphiteClient {
   public carbonClient: any;
 
   constructor(config) {
-    this.carbonClient = new Client(config)
+    this.carbonClient = new Client(config);
   }
 
   /**

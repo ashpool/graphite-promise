@@ -1,7 +1,7 @@
 /*jshint undef:false */
 var chaiAsPromised = require('chai-as-promised'),
   chai = require('chai'),
-  metric = require('./../lib/metric');
+  metric = require('./../src/metric');
 
 chai.should();
 chai.use(chaiAsPromised);

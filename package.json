@@ -16,10 +16,10 @@
       "name": "Magnus Ljadas <magnus.ljadas@gmail.com> (https://github.com/ashpool)"
     }
   ],
-  "main": "./lib/graphite",
-  "directories": {
-    "test": "test"
-  },
+  "main": "./build/graphite",
+  "files": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ashpool/graphite-promise.git"

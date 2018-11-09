@@ -6,7 +6,7 @@ chai.should();
 chai.use(chaiAsPromised);
 
 describe('CarbonClient', function () {
-  var Carbon = require('./../lib/carbon'),
+  var Carbon = require('./../src/carbon'),
     client,
     socketMock;
 

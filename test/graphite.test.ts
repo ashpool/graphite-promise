@@ -17,10 +17,8 @@ describe('GraphiteClient', () => {
       client.carbonClient._url.should.equal('plaintext://127.0.0.1:2003/');
       client.carbonClient._hostedGraphiteKey.should.equal('');
     });
-    it('is ok to use only url as argument', () => {
-      const client = new GraphiteClient('plaintext://127.0.0.1:2003/');
-      client.carbonClient._url.should.equal('plaintext://127.0.0.1:2003/');
-      client.carbonClient._hostedGraphiteKey.should.equal('');
+    it('does NOT accept only url as constructor argument', () => {
+      const client = new GraphiteClient('plaintext://127.0.0.1:2003/').should.throw;
     });
   });
 

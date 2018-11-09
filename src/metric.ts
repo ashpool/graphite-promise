@@ -1,5 +1,5 @@
-module.exports = {
-  flatten: function (obj, flat, prefix) {
+export module Metric {
+  export function flatten(obj, flat?: any, prefix?: string) {
     flat = flat || {};
     prefix = prefix || '';
 
@@ -15,4 +15,4 @@ module.exports = {
     }
     return flat;
   }
-};
+}

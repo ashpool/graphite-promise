@@ -1,11 +1,11 @@
-const Client = require('./carbon');
-import { Metric } from './metric';
+import {CarbonClient} from "./carbon";
+import {Metric} from './metric';
 
 export class GraphiteClient {
-  public carbonClient: any;
+  public _carbonClient: CarbonClient;
 
   constructor(config) {
-    this.carbonClient = new Client(config);
+    this._carbonClient = new CarbonClient(config);
   }
 
   /**
@@ -15,14 +15,12 @@ export class GraphiteClient {
    * @param timestamp defaults to Date.now()
    * @returns {Promise} a promise
    */
-  public write = function (metrics, timestamp) {
-    timestamp = timestamp || Date.now();
-    timestamp = Math.floor(timestamp / 1000);
-    return this.carbonClient.write(Metric.flatten(metrics), timestamp);
+  public write = function (metrics: Record<string, any>, timestamp: number) {
+    return this._carbonClient.write(Metric.flatten(metrics), Math.floor((timestamp || Date.now()) / 1000));
   };
 
   public end = function () {
-    return this.carbonClient.end();
+    return this._carbonClient.end();
   };
 }
 

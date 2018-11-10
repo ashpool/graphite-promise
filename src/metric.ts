@@ -1,5 +1,5 @@
 export module Metric {
-  export function flatten(obj: Record<string, number>, flat: Record<string, number> = {}, prefix: string = '') {
+  export function flatten(obj: Record<string, any>, flat: Record<string, number> = {}, prefix: string = '') {
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         const value = obj[key];

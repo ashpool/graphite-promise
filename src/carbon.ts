@@ -11,11 +11,11 @@ export class CarbonClient {
     this._hostedGraphiteKey = properties.hostedGraphiteKey ? properties.hostedGraphiteKey + '.' : '';
   }
 
-  public write = (metrics: Record<string, number>[], timestamp: number): Promise<string> => {
+  public write = (metrics: Record<string, number>, timestamp: number): Promise<string> => {
     return new Promise((resolve, reject) => {
       this._connect().then((socket: net.Socket) => {
-        var lines = '';
-        for (var path in metrics) {
+        let lines = '';
+        for (const path in metrics) {
           if (metrics.hasOwnProperty(path)) {
             lines += [path, metrics[path], timestamp].join(' ') + '\n';
           }
@@ -70,6 +70,3 @@ export class CarbonClient {
     });
   };
 }
-
-
-module.exports = CarbonClient;

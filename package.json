@@ -16,7 +16,7 @@
       "name": "Magnus Ljadas <magnus.ljadas@gmail.com> (https://github.com/ashpool)"
     }
   ],
-  "main": "./build/graphite",
+  "main": "./build/index.js",
   "files": [
     "build"
   ],
@@ -40,7 +40,6 @@
   "engines": {
     "node": ">=8"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/chai-as-promised": "^7.1.0",
@@ -56,6 +55,7 @@
     "mocha": "^5.2.0",
     "prettier": "^1.15.1",
     "ts-mocha": "^2.0.0",
+    "ts-mockito": "^2.3.1",
     "typesafe": "^0.9.8",
     "typescript": "^3.1.6",
     "typescript-eslint-parser": "^20.1.1",

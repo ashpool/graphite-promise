@@ -4,69 +4,57 @@ import * as url from 'url';
 export class CarbonClient {
   public _url: string;
   public _hostedGraphiteKey: string;
-  public _socket: net.Socket;
+  public _socket: net.Socket | undefined;
 
   constructor(properties: Record<string, string>) {
     this._url = properties.url;
     this._hostedGraphiteKey = properties.hostedGraphiteKey ? properties.hostedGraphiteKey + '.' : '';
   }
 
-  public write = (metrics: Record<string, number>, timestamp: number): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      this._connect().then((socket: net.Socket) => {
-        let lines = '';
-        for (const path in metrics) {
-          if (metrics.hasOwnProperty(path)) {
-            lines += [path, metrics[path], timestamp].join(' ') + '\n';
-          }
-        }
-        socket.write(this._hostedGraphiteKey + lines, 'utf-8', (err: Error) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(lines);
-          }
-        });
-      }, (error: Error) => {
-        reject(error);
-      });
-    });
+  public async write(metrics: Record<string, number>, timestamp: number): Promise<string> {
+    let lines = '';
+    for (const path in metrics) {
+      if (metrics.hasOwnProperty(path)) {
+        lines += [path, metrics[path], timestamp].join(' ') + '\n';
+      }
+    }
+    const socket = await this._connect();
+    await socket.write(this._hostedGraphiteKey + lines, 'utf-8');
+    return lines;
   };
 
-  private _connect = () => {
-    return new Promise((resolve, reject) => {
-      if (this._socket) {
-        return resolve(this._socket);
-      }
-      const dsn = url.parse(this._url);
-      const host = dsn.hostname;
-      const port = dsn.port ? parseInt(dsn.port, 10) : 2003;
-      const timeout = 1000;
-      const socket = new net.Socket();
-      socket.setTimeout(timeout, () => {
-        socket.destroy();
-        reject(new Error('Socket timeout'));
-      });
-      socket.on('error', (err: Error) => {
-        socket.destroy();
-        reject(err);
-      });
-      this._socket = socket.connect(port, host, (err: Error) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(this._socket);
-        }
-      });
+  private async _connect(): Promise<net.Socket> {
+    if (this._socket) {
+      return this._socket;
+    }
+    const dsn = url.parse(this._url);
+    const host = dsn.hostname || 'localhost';
+    const port = dsn.port ? parseInt(dsn.port, 10) : 2003;
+    const timeout = 1000;
+    const socket = new net.Socket();
+
+    socket.setTimeout(timeout, () => {
+      socket.destroy();
+      throw(new Error('Socket timeout'));
     });
+
+    socket.on('error', (err: Error) => {
+      socket.destroy();
+      throw(err);
+    });
+
+    this._socket = socket.connect(port, host, (err: Error) => {
+      if (err) {
+        throw(err);
+      }
+    });
+
+    return this._socket;
   };
 
-  public end = () => {
-    return new Promise((resolve) => {
-      if (this._socket) {
-        this._socket.end();
-      }
-      resolve();
-    });
+  public async end() {
+    if (this._socket) {
+      this._socket.end();
+    }
   };
 }

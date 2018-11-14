@@ -1,5 +1,5 @@
 import {GraphiteClient} from '../src/graphite';
-import * as chaiAsPromised from 'chai-as-promised';
+import chaiAsPromised from 'chai-as-promised';
 import * as chai from "chai";
 
 chai.should();
@@ -18,6 +18,7 @@ describe('GraphiteClient', () => {
       client._carbonClient._hostedGraphiteKey.should.equal('');
     });
     it('does NOT accept only url as constructor argument', () => {
+     // @ts-ignore
       const client = new GraphiteClient('plaintext://127.0.0.1:2003/').should.throw;
     });
   });

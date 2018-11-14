@@ -16,6 +16,23 @@
     "semi": 2,
     "no-duplicate-imports": "off",
     "no-unused-vars": "off",
-    "import/no-duplicates": "error"
+    "import/no-duplicates": "error",
+    "typescript/no-unused-vars": "error",
+    "typescript/adjacent-overload-signatures": "error",
+    "typescript/class-name-casing": "error",
+    "typescript/interface-name-prefix": "error",
+    "typescript/member-delimiter-style": ["error", {
+      "delimiter": "semi",
+      "requireLast": true,
+      "ignoreSingleLine": true
+    }],
+    "typescript/no-angle-bracket-type-assertion": "error",
+    "typescript/no-array-constructor": "error",
+    "typescript/no-empty-interface": "error",
+    "typescript/no-inferrable-types": ["error", {
+      "ignoreProperties": false,
+      "ignoreParameters": true
+    }],
+    "typescript/type-annotation-spacing": "error"
   }
 }

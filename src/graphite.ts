@@ -4,7 +4,7 @@ import {Metric} from './metric';
 export class GraphiteClient {
   public _carbonClient: CarbonClient;
 
-  constructor(config) {
+  constructor(config: Record<string, string>) {
     this._carbonClient = new CarbonClient(config);
   }
 
@@ -15,12 +15,17 @@ export class GraphiteClient {
    * @param timestamp defaults to Date.now()
    * @returns {Promise} a promise
    */
-  public write = function (metrics: Record<string, any>, timestamp: number) {
-    return this._carbonClient.write(Metric.flatten(metrics), Math.floor((timestamp || Date.now()) / 1000));
+  public write (metrics: Record<string, any>, timestamp?: number): Promise<string> {
+    let lines = '';
+    for (const path in metrics) {
+      if (metrics.hasOwnProperty(path)) {
+        lines += [path, metrics[path], timestamp].join(' ') + '\n';
+      }
+    }
+    return this._carbonClient.write(Metric.flatten(metrics), timestamp || Math.floor(Date.now() / 1000));
   };
 
-  public end = function () {
+  public end () {
     return this._carbonClient.end();
   };
 }
-

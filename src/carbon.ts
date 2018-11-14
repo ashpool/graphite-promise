@@ -11,16 +11,10 @@ export class CarbonClient {
     this._hostedGraphiteKey = properties.hostedGraphiteKey ? properties.hostedGraphiteKey + '.' : '';
   }
 
-  public async write(metrics: Record<string, number>, timestamp: number): Promise<string> {
-    let lines = '';
-    for (const path in metrics) {
-      if (metrics.hasOwnProperty(path)) {
-        lines += [path, metrics[path], timestamp].join(' ') + '\n';
-      }
-    }
+  public async write(message: string): Promise<string> {
     const socket = await this._connect();
-    await socket.write(this._hostedGraphiteKey + lines, 'utf-8');
-    return lines;
+    await socket.write(this._hostedGraphiteKey + message, 'utf-8');
+    return message;
   };
 
   private async _connect(): Promise<net.Socket> {

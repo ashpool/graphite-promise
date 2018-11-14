@@ -16,13 +16,16 @@ export class GraphiteClient {
    * @returns {Promise} a promise
    */
   public write (metrics: Record<string, any>, timestamp?: number): Promise<string> {
+    const flatMetrics = Metric.flatten(metrics);
+    const ts = timestamp || Date.now();
     let lines = '';
-    for (const path in metrics) {
-      if (metrics.hasOwnProperty(path)) {
-        lines += [path, metrics[path], timestamp].join(' ') + '\n';
+    for (let path in flatMetrics) {
+      if (flatMetrics.hasOwnProperty(path)) {
+        let value = flatMetrics[path];
+        lines += [path, value, ts].join(' ') + '\n';
       }
     }
-    return this._carbonClient.write(Metric.flatten(metrics), timestamp || Math.floor(Date.now() / 1000));
+    return this._carbonClient.write(lines);
   };
 
   public end () {

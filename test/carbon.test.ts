@@ -23,7 +23,7 @@ describe('CarbonClient', () => {
       client._socket = socket;
 
       // When
-      await client.write({'home.indoor.temp': 21.2}, 1427727486200);
+      await client.write('home.indoor.temp 21.2 1427727486200\n');
 
       // Then
       verify(socketMock.write('YOUR-API-KEY.home.indoor.temp 21.2 1427727486200\n', 'utf-8')).called();
@@ -35,11 +35,10 @@ describe('CarbonClient', () => {
       client._socket = socket;
 
       // When
-      await client.write({'home.indoor.temp': 21.2}, 1427727486200);
+      await client.write('home.indoor.temp 21.2 1427727486200\n');
 
       // Then
       verify(socketMock.write('home.indoor.temp 21.2 1427727486200\n', 'utf-8')).called();
-
     });
 
     it('rejects when a socket error occur', (done) => {
@@ -49,7 +48,7 @@ describe('CarbonClient', () => {
       client._socket = socket;
 
       // When
-      client.write({'home.indoor.temp': 21.2}, 1427727486200).should.eventually.be.rejected.notify(done);
+      client.write('home.indoor.temp 21.2 1427727486200\n').should.eventually.be.rejected.notify(done);
     });
   });
 });

@@ -31,6 +31,7 @@ export default class CarbonClient {
 
     socket.setTimeout(timeout, () => {
       socket.destroy();
+      throw(new Error('Socket timeout'));
     });
 
     socket.on('error', (err: Error) => {

@@ -1,3 +1,3 @@
-export * from './graphite';
-export * from './carbon';
-export * from './metric';
+export { default as GraphiteClient } from './graphite';
+export { default as CarbonClient } from './carbon';
+export { default as Metric }  from './metric';

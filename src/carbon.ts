@@ -1,27 +1,29 @@
 import * as net from 'net';
 import * as url from 'url';
 
-export class CarbonClient {
-  public _url: string;
-  public _hostedGraphiteKey: string;
-  public _socket: net.Socket | undefined;
+export default class CarbonClient {
+  serverUrl: string;
+
+  hostedGraphiteKey: string;
+
+  socket: net.Socket | undefined;
 
   constructor(properties: Record<string, string>) {
-    this._url = properties.url;
-    this._hostedGraphiteKey = properties.hostedGraphiteKey ? properties.hostedGraphiteKey + '.' : '';
+    this.serverUrl = properties.url;
+    this.hostedGraphiteKey = properties.hostedGraphiteKey ? `${properties.hostedGraphiteKey}.`: '';
   }
 
   public async write(message: string): Promise<string> {
-    const socket = await this._connect();
-    await socket.write(this._hostedGraphiteKey + message, 'utf-8');
+    const socket = await this.connect();
+    await socket.write(this.hostedGraphiteKey + message, 'utf-8');
     return message;
   };
 
-  private async _connect(): Promise<net.Socket> {
-    if (this._socket) {
-      return this._socket;
+  private async connect(): Promise<net.Socket> {
+    if (this.socket) {
+      return this.socket;
     }
-    const dsn = url.parse(this._url);
+    const dsn = url.parse(this.serverUrl);
     const host = dsn.hostname || 'localhost';
     const port = dsn.port ? parseInt(dsn.port, 10) : 2003;
     const timeout = 1000;
@@ -37,18 +39,18 @@ export class CarbonClient {
       throw(err);
     });
 
-    this._socket = socket.connect(port, host, (err: Error) => {
+    this.socket = socket.connect(port, host, (err?: Error) => {
       if (err) {
         throw(err);
       }
     });
 
-    return this._socket;
+    return this.socket;
   };
 
   public async end() {
-    if (this._socket) {
-      this._socket.end();
+    if (this.socket) {
+      this.socket.end();
     }
   };
 }

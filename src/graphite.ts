@@ -1,11 +1,11 @@
-import {CarbonClient} from "./carbon";
-import {Metric} from './metric';
+import CarbonClient from "./carbon";
+import Metric from './metric';
 
-export class GraphiteClient {
-  public _carbonClient: CarbonClient;
+export default class GraphiteClient {
+  carbonClient: CarbonClient;
 
   constructor(config: Record<string, string>) {
-    this._carbonClient = new CarbonClient(config);
+    this.carbonClient = new CarbonClient(config);
   }
 
   /**
@@ -18,17 +18,20 @@ export class GraphiteClient {
   public write (metrics: Record<string, any>, timestamp?: number): Promise<string> {
     const flatMetrics = Metric.flatten(metrics);
     const ts = timestamp || Date.now();
+
+    // const lines = Object.entries(flatMetrics).map(path => [path, flatMetrics[path], ts]).join('\n');
+
     let lines = '';
-    for (let path in flatMetrics) {
-      if (flatMetrics.hasOwnProperty(path)) {
-        let value = flatMetrics[path];
-        lines += [path, value, ts].join(' ') + '\n';
+    for (const path in flatMetrics) { // eslint-disable-line no-restricted-syntax
+      if ({}.hasOwnProperty.call(flatMetrics, path)) {
+        const value = flatMetrics[path];
+        lines += `${[path, value, ts].join(' ')}\n`;
       }
     }
-    return this._carbonClient.write(lines);
+    return this.carbonClient.write(lines);
   };
 
   public end () {
-    return this._carbonClient.end();
+    return this.carbonClient.end();
   };
 }

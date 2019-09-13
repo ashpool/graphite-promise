@@ -1,6 +1,6 @@
-import {Metric} from '../src';
 import chaiAsPromised from 'chai-as-promised';
 import * as chai from "chai";
+import {Metric} from '../src';
 
 chai.should();
 chai.use(chaiAsPromised);

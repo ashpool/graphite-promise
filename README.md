@@ -1,6 +1,7 @@
 # graphite-promise
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Actions Status](https://github.com/ashpool/graphite-promise/workflows/Node.js%20Package/badge.svg)](https://github.com/ashpool/graphite-promise/actions)
+[![Actions Status](https://github.com/ashpool/graphite-promise/workflows/Node%20CI/badge.svg)](https://github.com/ashpool/graphite-promise/actions)
 
 ## Status
 

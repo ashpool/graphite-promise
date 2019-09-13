@@ -15,7 +15,8 @@ export default class CarbonClient {
 
   public async write(message: string): Promise<string> {
     const socket = await this.connect();
-    await socket.write(this.hostedGraphiteKey + message, 'utf-8');
+    socket.write(this.hostedGraphiteKey + message, 'utf-8');
+    socket.destroy();
     return message;
   };
 

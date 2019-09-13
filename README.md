@@ -7,8 +7,6 @@
 
 Experimental/Unstable
 
-NOTE: The current release is broken :(
-
 ## Usage
 
 ```js

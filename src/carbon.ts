@@ -16,12 +16,11 @@ export default class CarbonClient {
   public async write(message: string): Promise<string> {
     const socket = await this.connect();
     socket.write(this.hostedGraphiteKey + message, 'utf-8');
-    socket.destroy();
     return message;
   };
 
   private async connect(): Promise<net.Socket> {
-    if (this.socket) {
+    if (this.socket && !this.socket.destroyed) {
       return this.socket;
     }
     const dsn = url.parse(this.serverUrl);
@@ -32,7 +31,6 @@ export default class CarbonClient {
 
     socket.setTimeout(timeout, () => {
       socket.destroy();
-      throw(new Error('Socket timeout'));
     });
 
     socket.on('error', (err: Error) => {

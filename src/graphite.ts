@@ -25,7 +25,7 @@ export default class GraphiteClient {
     for (const path in flatMetrics) { // eslint-disable-line no-restricted-syntax
       if ({}.hasOwnProperty.call(flatMetrics, path)) {
         const value = flatMetrics[path];
-        lines += `${[path, value, ts].join(' ')}\n`;
+        lines += `${[path.replace(/\s+/g, '-'), value, ts].join(' ')}\n`;
       }
     }
     return this.carbonClient.write(lines);

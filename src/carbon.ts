@@ -1,21 +1,22 @@
 import * as net from 'net';
 import * as url from 'url';
+import {Config} from "./types";
 
 export default class CarbonClient {
-  serverUrl: string;
+  url: string;
 
   hostedGraphiteKey: string;
 
   socket: net.Socket | undefined;
 
-  constructor(properties: Record<string, string>) {
-    this.serverUrl = properties.url;
-    this.hostedGraphiteKey = properties.hostedGraphiteKey ? `${properties.hostedGraphiteKey}.`: '';
+  constructor(config: Config) {
+    this.url = config.url;
+    this.hostedGraphiteKey = config.hostedGraphiteKey ? `${config.hostedGraphiteKey}.`: '';
   }
 
   public async write(message: string): Promise<string> {
     const socket = await this.connect();
-    socket.write(this.hostedGraphiteKey + message, 'utf-8');
+    socket.write(this.hostedGraphiteKey + message, 'utf-8', () => socket.end());
     return message;
   };
 
@@ -23,10 +24,10 @@ export default class CarbonClient {
     if (this.socket && !this.socket.destroyed) {
       return this.socket;
     }
-    const dsn = url.parse(this.serverUrl);
+    const dsn = url.parse(this.url);
     const host = dsn.hostname || 'localhost';
     const port = dsn.port ? parseInt(dsn.port, 10) : 2003;
-    const timeout = 1000;
+    const timeout = 3000;
     const socket = new net.Socket();
 
     socket.setTimeout(timeout, () => {

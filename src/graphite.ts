@@ -1,10 +1,11 @@
 import CarbonClient from "./carbon";
 import Metric from './metric';
+import {Config} from "./types";
 
 export default class GraphiteClient {
   carbonClient: CarbonClient;
 
-  constructor(config: Record<string, string>) {
+  constructor(config: Config) {
     this.carbonClient = new CarbonClient(config);
   }
 

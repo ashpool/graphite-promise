@@ -28,12 +28,12 @@ describe('GraphiteClient', () => {
   describe('#createClient', () => {
     it('reads url and apiKey', () => {
       const client = new GraphiteClient({hostedGraphiteKey: 'YOUR-API-KEY', url: 'plaintext://127.0.0.1:2003/'});
-      client.carbonClient.serverUrl.should.equal('plaintext://127.0.0.1:2003/');
+      client.carbonClient.url.should.equal('plaintext://127.0.0.1:2003/');
       client.carbonClient.hostedGraphiteKey.should.equal('YOUR-API-KEY.');
     });
     it('apiKey is optional and defaults to empty string', () => {
       const client = new GraphiteClient({url: 'plaintext://127.0.0.1:2003/'});
-      client.carbonClient.serverUrl.should.equal('plaintext://127.0.0.1:2003/');
+      client.carbonClient.url.should.equal('plaintext://127.0.0.1:2003/');
       client.carbonClient.hostedGraphiteKey.should.equal('');
     });
   });

@@ -22,7 +22,7 @@ describe('GraphiteClient', () => {
 
       // Then
       const message = capture(carbonClientMock.write).first();
-      message.should.eql(['home.indoor.temp 21.2 1542224824062\n']);
+      message.should.eql(['home.indoor.temp 21.2 1542224824\n']);
     });
   });
   describe('#createClient', () => {

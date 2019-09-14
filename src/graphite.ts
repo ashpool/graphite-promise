@@ -16,13 +16,14 @@ export default class GraphiteClient {
    * @param timestamp defaults to Date.now()
    * @returns {Promise} a promise
    */
-  public write (metrics: Record<string, any>, timestamp: number = Date.now()): Promise<string> {
+  public write (metrics: Record<string, any>, timestamp?: number): Promise<string> {
     const flatMetrics = Metric.flatten(metrics);
+    const ts = Math.floor((timestamp || Date.now()) / 1000);
     const lines = [];
     for (const path in flatMetrics) { // eslint-disable-line no-restricted-syntax
       if ({}.hasOwnProperty.call(flatMetrics, path)) {
         const value = flatMetrics[path];
-        lines.push(`${path.replace(/\s+/g, '-')} ${value} ${timestamp}\n`);
+        lines.push(`${path} ${value} ${ts}\n`);
       }
     }
     return this.carbonClient.write(lines.join());

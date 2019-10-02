@@ -1,5 +1,5 @@
 module Metric {
-  export function flatten(obj: Record<string, any>, flat: Record<string, number> = {}, prefix: string = '') { // eslint-disable-line no-inner-declarations
+  export function flatten(obj: Record<string, any>, flat: Record<string, number> = {}, prefix: string = ''): Record<string, number> { // eslint-disable-line no-inner-declarations
     for (const key in obj) { // eslint-disable-line no-restricted-syntax
       if ({}.hasOwnProperty.call(obj, key)) {
         const value = obj[key];

@@ -37,11 +37,4 @@ describe('GraphiteClient', () => {
       client.carbonClient.hostedGraphiteKey.should.equal('');
     });
   });
-
-  describe('#end', () => {
-    it('should be safe to call any time', (done) => {
-      const client = new GraphiteClient({url: 'plaintext://127.0.0.1:2003/'});
-      client.end().should.be.fulfilled.notify(done);
-    });
-  });
 });

@@ -28,8 +28,4 @@ export default class GraphiteClient {
     }
     return this.carbonClient.write(lines.join());
   };
-
-  public end () {
-    return this.carbonClient.end();
-  };
 }

@@ -1,6 +1,6 @@
 {
   "name": "graphite-promise",
-  "version": "2.0.12",
+  "version": "3.0.0",
   "description": "A Node.js module to interface with [Graphite](https://graphiteapp.org)",
   "keywords": [
     "graphite"

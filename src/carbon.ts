@@ -1,8 +1,8 @@
 import * as net from 'net';
 import * as url from 'url';
-import {Config} from "./types";
+import { Config } from './types';
 
-export default class CarbonClient {
+export class CarbonClient {
   url: string;
 
   hostedGraphiteKey: string;

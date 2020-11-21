@@ -1,8 +1,8 @@
-import CarbonClient from "./carbon";
+import {CarbonClient} from "./carbon";
 import Metric from './metric';
-import {Config} from "./types";
+import { Config } from './types';
 
-export default class GraphiteClient {
+export class GraphiteClient {
   carbonClient: CarbonClient;
 
   constructor(config: Config) {

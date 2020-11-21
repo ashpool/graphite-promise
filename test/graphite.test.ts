@@ -1,8 +1,8 @@
 import chaiAsPromised from 'chai-as-promised';
 import * as chai from "chai";
 import {anyString, capture, instance, mock, when} from "ts-mockito";
-import GraphiteClient from '../src/graphite';
-import CarbonClient from "../src/carbon";
+import {GraphiteClient} from '../src/graphite';
+import {CarbonClient} from "../src/carbon";
 
 chai.should();
 chai.use(chaiAsPromised);

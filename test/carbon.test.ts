@@ -2,7 +2,7 @@ import * as net from 'net';
 import {anyFunction, anyString, instance, mock, verify, when} from 'ts-mockito';
 import chaiAsPromised from 'chai-as-promised';
 import * as chai from "chai";
-import CarbonClient from "../src/carbon";
+import {CarbonClient} from "../src/carbon";
 
 chai.should();
 chai.use(chaiAsPromised);

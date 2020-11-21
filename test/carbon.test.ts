@@ -1,8 +1,15 @@
 import * as net from 'net';
-import {anyFunction, anyString, instance, mock, verify, when} from 'ts-mockito';
+import {
+  anyFunction,
+  anyString,
+  instance,
+  mock,
+  verify,
+  when,
+} from 'ts-mockito';
 import chaiAsPromised from 'chai-as-promised';
-import * as chai from "chai";
-import CarbonClient from "../src/carbon";
+import * as chai from 'chai';
+import { CarbonClient } from '../src/carbon';
 
 chai.should();
 chai.use(chaiAsPromised);
@@ -19,7 +26,10 @@ describe('CarbonClient', () => {
 
     it('writes api key on socket', async () => {
       // Given
-      const client = new CarbonClient({hostedGraphiteKey: 'YOUR-API-KEY', url: 'plaintext://127.0.0.1:2003/'});
+      const client = new CarbonClient({
+        hostedGraphiteKey: 'YOUR-API-KEY',
+        url: 'plaintext://127.0.0.1:2003/',
+      });
       client.socket = socket;
 
       // When
@@ -31,7 +41,7 @@ describe('CarbonClient', () => {
 
     it('writes flattened metrics encoded as utf-8', async () => {
       // Given
-      const client = new CarbonClient({url: 'plaintext://127.0.0.1:2003/'});
+      const client = new CarbonClient({ url: 'plaintext://127.0.0.1:2003/' });
       client.socket = socket;
 
       // When
@@ -44,7 +54,7 @@ describe('CarbonClient', () => {
     it('rejects when a socket error occur', (done) => {
       // Given
       when(socketMock.write(anyString(), anyString(), anyFunction())).thenThrow(new Error());
-      const client = new CarbonClient({url: 'plaintext://127.0.0.1:2003/'});
+      const client = new CarbonClient({ url: 'plaintext://127.0.0.1:2003/' });
       client.socket = socket;
 
       // When

@@ -1,8 +1,8 @@
 import * as net from 'net';
 import * as url from 'url';
-import {Config} from "./types";
+import { Config } from './types';
 
-export default class CarbonClient {
+export class CarbonClient {
   url: string;
 
   hostedGraphiteKey: string;
@@ -11,7 +11,7 @@ export default class CarbonClient {
 
   constructor(config: Config) {
     this.url = config.url;
-    this.hostedGraphiteKey = config.hostedGraphiteKey ? `${config.hostedGraphiteKey}.`: '';
+    this.hostedGraphiteKey = config.hostedGraphiteKey ? `${config.hostedGraphiteKey}.` : '';
   }
 
   public async write(message: string): Promise<string> {

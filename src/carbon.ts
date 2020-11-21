@@ -11,7 +11,7 @@ export class CarbonClient {
 
   constructor(config: Config) {
     this.url = config.url;
-    this.hostedGraphiteKey = config.hostedGraphiteKey ? `${config.hostedGraphiteKey}.`: '';
+    this.hostedGraphiteKey = config.hostedGraphiteKey ? `${config.hostedGraphiteKey}.` : '';
   }
 
   public async write(message: string): Promise<string> {

@@ -1,4 +1,4 @@
-import {CarbonClient} from "./carbon";
+import { CarbonClient } from './carbon';
 import Metric from './metric';
 import { Config } from './types';
 
@@ -16,7 +16,7 @@ export class GraphiteClient {
    * @param timestamp defaults to Date.now()
    * @returns {Promise} a promise
    */
-  public write (metrics: Record<string, any>, timestamp?: number): Promise<string> {
+  public write(metrics: Record<string, any>, timestamp?: number): Promise<string> {
     const flatMetrics = Metric.flatten(metrics);
     const ts = Math.floor((timestamp || Date.now()) / 1000);
     const lines = [];
@@ -29,7 +29,7 @@ export class GraphiteClient {
     return this.carbonClient.write(lines.join());
   };
 
-  public end () {
+  public end() {
     return this.carbonClient.end();
   };
 }

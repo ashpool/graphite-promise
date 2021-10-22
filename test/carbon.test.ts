@@ -7,12 +7,7 @@ import {
   verify,
   when,
 } from 'ts-mockito';
-import chaiAsPromised from 'chai-as-promised';
-import * as chai from 'chai';
 import { CarbonClient } from '../src/carbon';
-
-chai.should();
-chai.use(chaiAsPromised);
 
 describe('CarbonClient', () => {
   let socketMock: net.Socket;
@@ -51,14 +46,14 @@ describe('CarbonClient', () => {
       verify(socketMock.write('home.indoor.temp 21.2 1427727486200\n', 'utf-8', anyFunction())).called();
     });
 
-    it('rejects when a socket error occur', (done) => {
+    it('rejects when a socket error occur', () => {
       // Given
       when(socketMock.write(anyString(), anyString(), anyFunction())).thenThrow(new Error());
       const client = new CarbonClient({ url: 'plaintext://127.0.0.1:2003/' });
       client.socket = socket;
 
       // When
-      client.write('home.indoor.temp 21.2 1427727486200\n').should.eventually.be.rejected.notify(done);
+      expect(client.write('home.indoor.temp 21.2 1427727486200\n')).rejects.toThrow();
     });
   });
 });

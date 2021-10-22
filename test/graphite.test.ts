@@ -1,11 +1,6 @@
-import chaiAsPromised from 'chai-as-promised';
-import * as chai from 'chai';
 import { anyString, capture, instance, mock, when } from 'ts-mockito';
 import { GraphiteClient } from '../src/graphite';
 import { CarbonClient } from '../src/carbon';
-
-chai.should();
-chai.use(chaiAsPromised);
 
 describe('GraphiteClient', () => {
   describe('#write', () => {
@@ -22,7 +17,7 @@ describe('GraphiteClient', () => {
 
       // Then
       const message = capture(carbonClientMock.write).first();
-      message.should.eql(['home.indoor.temp 21.2 1542224824\n']);
+      expect(message).toEqual(['home.indoor.temp 21.2 1542224824\n']);
     });
   });
   describe('#createClient', () => {
@@ -31,20 +26,20 @@ describe('GraphiteClient', () => {
         hostedGraphiteKey: 'YOUR-API-KEY',
         url: 'plaintext://127.0.0.1:2003/',
       });
-      client.carbonClient.url.should.equal('plaintext://127.0.0.1:2003/');
-      client.carbonClient.hostedGraphiteKey.should.equal('YOUR-API-KEY.');
+      expect(client.carbonClient.url).toEqual('plaintext://127.0.0.1:2003/');
+      expect(client.carbonClient.hostedGraphiteKey).toEqual('YOUR-API-KEY.');
     });
     it('apiKey is optional and defaults to empty string', () => {
       const client = new GraphiteClient({ url: 'plaintext://127.0.0.1:2003/' });
-      client.carbonClient.url.should.equal('plaintext://127.0.0.1:2003/');
-      client.carbonClient.hostedGraphiteKey.should.equal('');
+      expect(client.carbonClient.url).toEqual('plaintext://127.0.0.1:2003/');
+      expect(client.carbonClient.hostedGraphiteKey).toEqual('');
     });
   });
 
   describe('#end', () => {
-    it('should be safe to call any time', (done) => {
+    it('should be safe to call any time', async () => {
       const client = new GraphiteClient({ url: 'plaintext://127.0.0.1:2003/' });
-      client.end().should.be.fulfilled.notify(done);
+      expect(await client.end()).toBeUndefined();
     });
   });
 });
